@@ -7,7 +7,7 @@ class Textinput:
         pygame.init()
         self.base_font = pygame.font.Font("font/montserrat-font/MontserratMedium-nRxlJ.ttf", 20)
         self.text = ''
-        self.input_rect = pygame.Rect(206, 190, 140, 32)
+        self.input_rect = pygame.Rect(30, 350, 380, 32)
         self.color_passive = pygame.Color(128,128,128)
         self.color_active = pygame.Color(255, 255, 255)
         self.color = self.color_passive
@@ -41,8 +41,8 @@ class Textinput:
         pygame.draw.rect(screen, self.color, self.input_rect, 2)
         text_surface = self.base_font.render(self.text, True, (255, 255, 255))
         size = pygame.font.Font.size(self.base_font, str(self.text))
-        screen.blit(text_surface, (int(700/2-size[0]/2), int(self.input_rect.y+5)))
-        self.input_rect.w = max(300, text_surface.get_width() + 10)
+        screen.blit(text_surface, (int(400/2-size[0]/2), int(self.input_rect.y+5)))
+        self.input_rect.w = max(340, text_surface.get_width() + 10)
         return self.text
     
     # Method to control all the key pressed

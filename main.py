@@ -1,23 +1,20 @@
 import pygame
 from pygame import *
-import os
-from serversSockets.tcp import client
 from components.colors import color
-from textInput import Textinput
-
-keep_going = True
-
+from components.chatbox import ChatBox
+from components.start import Start
 
 pygame.init()
-screen_size = (640, 420)
+screen_size = (540, 420)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("ChatBox")
 
-user = client.User()
-text = Textinput()
+menssage_suf = pygame.Surface((400, 400))
 
-send = False
-event = None
+keep_going = True
+links = {"start": Start(), "chatbox":ChatBox()}
+current_link = "start"
+user = ""
 
 while keep_going:
     screen.fill(color.black.value)
@@ -27,13 +24,7 @@ while keep_going:
             pygame.quit()
 
         elif event.type == pygame.KEYDOWN:
-            if pygame.key.get_pressed()[K_RETURN]:
-                send = True
-            elif pygame.key.get_pressed()[K_KP_ENTER]:
+            if pygame.key.get_pressed()[K_KP_ENTER]:
                 exit()
-    t = text.settingInputText(all_event, screen)
-    
-    if send:
-        user.serverConectAndSend(t)
-        send = False
+    current_link, user = links[current_link].run(all_event, screen, screen_size, user)
     pygame.display.update()

@@ -3,10 +3,11 @@ from socket import *
 class Server:
 
     serverName = "localhost"
-    serverPort = 12000
+    serverPort = 12001
     serverSocket = socket(AF_INET, SOCK_STREAM)
     serverSocket.bind((serverName, serverPort))
     serverSocket.listen(1)
+    sentence = ''
 
     print('The server id on state Run.')
     # Revert
@@ -14,9 +15,11 @@ class Server:
         l = list(string)
         i = 0
         for s in l:
-            if s.upper() != s:
-                l[i] = l[i].upper()
-            else:
+            # if s.upper() != s:
+            #     l[i] = l[i].upper()
+            # else:
+            #     l[i] = l[i].lower()
+            if s.upper() == s:
                 l[i] = l[i].lower()
             i += 1
 
@@ -25,13 +28,15 @@ class Server:
     def runServer(self):
         connectionSocket, addr = self.serverSocket.accept()
         sentence = connectionSocket.recv(1024).decode()
-        capitalizedSentence = self.reverte(sentence)
+        self.sentence += '/'+sentence
+        capitalizedSentence = self.reverte(self.sentence)
         connectionSocket.send(capitalizedSentence.encode())
         connectionSocket.close()
-        
+
     def startServer(self):
         while True:
             self.runServer()
+
 server = Server()
 server.startServer()
         
