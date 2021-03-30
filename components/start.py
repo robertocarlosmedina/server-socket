@@ -16,11 +16,11 @@ class Start:
         self.box_info = []
         self.x, self.y = 260, 150
         self.changeColor = True
-        self.font = pygame.font.SysFont("arial", 30)
+        self.font = pygame.font.SysFont("arial", 20)
         self.timer = 0
         self.user = " "
         self.created = False
-        self.buttons = ["Log"]
+        self.buttons = ["Login"]
 
     def run(self, all_event, screen, screen_size, user):
         del user
@@ -29,12 +29,12 @@ class Start:
             if event.type == pygame.KEYDOWN:
                 if pygame.key.get_pressed()[K_RETURN]:
                     self.created = True
-        size = pygame.font.Font.size(self.font, 'AlgorDataStruct')
-        line = self.font.render('AlgorDataStruct', True, color.white.value)
+        size = pygame.font.Font.size(self.font, 'Chatbox')
+        line = self.font.render('Chatbox', True, color.white.value)
         screen.blit(line, (int(screen_size[0]/2-size[0]/2), int(screen_size[1]/2-size[1]/2)-60))
-        self.user = self.text.settingInputText(all_event, screen)
+        self.user = self.text.settingInputText(all_event, screen, (int(screen_size[0]/2-190), 175, 380))
         
-        verticalButtonsDisplay(screen, self.buttons, 205, (int(screen_size[0]/2), int(screen_size[1]/2)), (150, 40),mouse_pos, " ", self.font)
+        verticalButtonsDisplay(screen, self.buttons, 230, (int(screen_size[0]/2)-100, int(screen_size[1]/2)+40), (200, 60),mouse_pos, " ", self.font)
         if self.created:
             return "chatbox", self.user
         else:

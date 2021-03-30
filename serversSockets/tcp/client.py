@@ -3,7 +3,7 @@ from socket import *
 class User:
 
     serverName = 'localhost'
-    serverPort = 12001
+    serverPort = 12000
     menssages = None
     
     def serverConectAndSend(self, sentence):

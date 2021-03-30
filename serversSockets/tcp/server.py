@@ -3,7 +3,7 @@ from socket import *
 class Server:
 
     serverName = "localhost"
-    serverPort = 12001
+    serverPort = 12000
     serverSocket = socket(AF_INET, SOCK_STREAM)
     serverSocket.bind((serverName, serverPort))
     serverSocket.listen(1)
@@ -28,6 +28,8 @@ class Server:
     def runServer(self):
         connectionSocket, addr = self.serverSocket.accept()
         sentence = connectionSocket.recv(1024).decode()
+        if len(self.sentence)==100:
+            self.sentence = ''
         self.sentence += '/'+sentence
         capitalizedSentence = self.reverte(self.sentence)
         connectionSocket.send(capitalizedSentence.encode())
