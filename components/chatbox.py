@@ -30,7 +30,7 @@ class ChatBox:
 
         t = self.text.settingInputText(all_event, self.menssage_suf, (30, 355, 340))
 
-        if self.send or self.start:
+        if (self.send or self.start)and t !='':
             self.all_menssage = self.user.serverConectAndSend(t+'-'+self.userName)
             self.send = False
             self.start = False
@@ -39,7 +39,7 @@ class ChatBox:
         return "chatbox", self.userName
 
     def menssageDisplay(self):
-        y = 320
+        y = 310
         if self.all_menssage!=None:
             msgs = self.all_menssage.split("/")
             msgs = msgs[::-1]
@@ -55,15 +55,17 @@ class ChatBox:
                     sender = sender[1]
                     text_surface = self.base_font.render(msg, True, (255, 255, 255))
                     size = pygame.font.Font.size(self.base_font, str(msg))
-                    button_box = pygame.Rect(size[0]-20, y-20, size[0]+20, size[1]+20)
+                    text_surface1 = self.base_font.render(sender, True, color.white1.value)
+                    size1 = pygame.font.Font.size(self.base_font, str(sender))
                     
-                if sender==self.userName.lower():
+                if sender==self.userName.lower() and sender!=" " and sender!="":
                     button_box = pygame.Rect(int(400/2-size[0]/2)+100-10, y, size[0]+20, size[1])
-                    pygame.draw.rect(self.menssage_suf, color.green.value, button_box)
+                    pygame.draw.rect(self.menssage_suf, color.grey.value, button_box)
                     self.menssage_suf.blit(text_surface, (int(400/2-size[0]/2)+100, y))
-                else:
-                    button_box = pygame.Rect(int(400/2-size[0]/2)-100-10, y-20, size[0]+20, size[1])
-                    pygame.draw.rect(self.menssage_suf, color.green.value, button_box)
+                    self.menssage_suf.blit(text_surface1, (int(400/2-size[0]/2)+100, y+20))
+                elif sender!=" " and sender!="":
+                    button_box = pygame.Rect(int(400/2-size[0]/2)-100-10, y, size[0]+20, size[1])
+                    pygame.draw.rect(self.menssage_suf, color.blue.value, button_box)
                     self.menssage_suf.blit(text_surface, (int(400/2-size[0]/2)-100, y))
-
-                y -= 30
+                    self.menssage_suf.blit(text_surface1, (int(400/2-size[0]/2)-100, y+20))
+                y -= 50

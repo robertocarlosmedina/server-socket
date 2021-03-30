@@ -28,7 +28,7 @@ class Server:
     def runServer(self):
         connectionSocket, addr = self.serverSocket.accept()
         sentence = connectionSocket.recv(1024).decode()
-        if len(self.sentence)==100:
+        if len(self.sentence)==250:
             self.sentence = ''
         self.sentence += '/'+sentence
         capitalizedSentence = self.reverte(self.sentence)

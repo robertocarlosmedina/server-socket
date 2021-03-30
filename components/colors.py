@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class color(Enum):
-    blue=(0, 0, 255)
+    blue=(0, 35, 255)
     white=(255, 255, 255)
     white1=(155, 155, 155)
     yellow = (255, 255, 0)
